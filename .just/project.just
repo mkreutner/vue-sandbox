@@ -41,9 +41,21 @@ shell CONTAINER SHELL="bash":
 logs CONTAINER:
     @docker compose logs -f -n 40 {{CONTAINER}}
 
+# Run node command in CONTAINER
+node CONTAINER *COMMAND:
+    @docker compose exec {{CONTAINER}} node {{COMMAND}}
+
+# Run npm command in CONTAINER
+npm CONTAINER *COMMAND:
+    @docker compose exec {{CONTAINER}} npm {{COMMAND}}
+
+# Run yarn command in CONTAINER
+yarn CONTAINER *COMMAND:
+    @docker compose exec {{CONTAINER}} yarn {{COMMAND}}
+
 # Clean Bash History file
 history-clean CONTAINER:
-    @echo -n > ./src/{{CONTAINER}}/.bash_history
+    @echo -n > ./data/tmp/.bash_history
 
 [private]
 @help:
