@@ -1,0 +1,23 @@
+services:
+  sandbox:
+    build:
+      context: ./docker/sandbox
+      dockerfile: Dockerfile.${COMMON_ENVIRONMENT}
+      args:
+        - IMG_NAME=${BASE_IMG_NAME}
+        - IMG_TAG=${BASE_IMG_TAG}
+        - SHELL=${COMMON_SHELL:-sh}
+        - TIMEZONE=${COMMON_TIMEZONE:-UTC}
+    container_name: sandbox_vue
+    hostname: sandbox_vue
+    restart: no # unless-stopped
+    tty: true
+    stdin_open: true
+    ports:
+      - 8080:8080
+    volumes:
+      - "./src/sandbox:/home/node"
+      - "./data/tmp/.bash_history:/home/node/.bash_history"
+    user: "node"
+    working_dir: "/home/node"
+

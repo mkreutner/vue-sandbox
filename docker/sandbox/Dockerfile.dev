@@ -1,0 +1,35 @@
+ARG IMG_NAME=${$IMG_NAME:-debian}
+ARG IMG_TAG=${$IMG_TAG:-latest}
+
+FROM ${IMG_NAME}:${IMG_TAG}
+
+ARG IMG_NAME=${IMG_NAME:-debian}
+ARG IMG_TAG=${IMG_TAG:-latest}
+ARG SHELL=${SHELL:-bash}
+ARG TIMEZONE=${TIMEZONE:-UTC}
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+ENV TZ="${TIMEZONE}"
+
+RUN apt-get -qq -y update && apt-get -qq -y upgrade \
+    && apt-get -qq -y install \
+        vim \
+        curl \
+        wget \
+        apt-transport-https \
+        sudo \
+        git \
+        tzdata \
+        bash \
+        zip \
+    && ln -fs /usr/share/zoneinfo/${TIMEZONE} /etc/localtime \
+    && dpkg-reconfigure -f noninteractive tzdata
+
+# Create developer user
+RUN usermod -aG sudo -s /bin/${SHELL} node \
+    && echo "node ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/casper
+
+# Set user and working directory
+USER node
+WORKDIR /home/node
