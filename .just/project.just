@@ -1,6 +1,13 @@
 # +---------------------------------------------------------------------------
 # : Project specific recipes
 # +---------------------------------------------------------------------------
+# Set the default context (service) for commands like exec, shell, logs, node, npm, yarn
+# You can override this by providing the SERVICE variable, e.g.:
+# just SERVICE=other-service exec <command>
+# Available services: sandbox, ...  (add your services here)
+# ----------------------------------------------------------------------------- 
+SERVICE := "sandbox"
+
 # Build or rebuild services
 build *OPTIONS:
     @docker compose build {{OPTIONS}}
@@ -29,32 +36,32 @@ restart:
 watch:
     @docker compose watch
 
-# Execute a COMMAND in CONTAINER container
-exec CONTAINER *COMMAND:
-    @docker compose exec {{CONTAINER}} {{COMMAND}}
+# Execute a COMMAND in SERVICE container
+exec *COMMAND:
+    @docker compose exec {{SERVICE}} {{COMMAND}}
 
-# Launch SHELL in CONTAINER
-shell CONTAINER SHELL="bash": 
-    @docker compose exec {{CONTAINER}} {{SHELL}}
+# Launch SHELL in SERVICE container (default: bash)
+shell SHELL="bash": 
+    @docker compose exec {{SERVICE}} {{SHELL}}
 
-# Display tdout logs in CONTAINER 
-logs CONTAINER:
-    @docker compose logs -f -n 40 {{CONTAINER}}
+# Display tdout logs in SERVICE container 
+logs:
+    @docker compose logs -f -n 40 {{SERVICE}}
 
-# Run node command in CONTAINER
-node CONTAINER *COMMAND:
-    @docker compose exec {{CONTAINER}} node {{COMMAND}}
+# Run node command in SERVICE container
+node *COMMAND:
+    @docker compose exec {{SERVICE}} node {{COMMAND}}
 
-# Run npm command in CONTAINER
-npm CONTAINER *COMMAND:
-    @docker compose exec {{CONTAINER}} npm {{COMMAND}}
+# Run npm command in SERVICE container
+npm *COMMAND:
+    @docker compose exec {{SERVICE}} npm {{COMMAND}}
 
-# Run yarn command in CONTAINER
-yarn CONTAINER *COMMAND:
-    @docker compose exec {{CONTAINER}} yarn {{COMMAND}}
+# Run yarn command in SERVICE container
+yarn *COMMAND:
+    @docker compose exec {{SERVICE}} yarn {{COMMAND}}
 
 # Clean Bash History file
-history-clean CONTAINER:
+history-clean:
     @echo -n > ./data/tmp/.bash_history
 
 [private]

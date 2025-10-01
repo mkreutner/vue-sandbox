@@ -16,8 +16,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - "./src/sandbox:/home/node"
-      - "./data/tmp/.bash_history:/home/node/.bash_history"
+      - "./src/sandbox:/home/node/workspace"
+      - "./data/tmp:/home/node"
     user: "node"
     working_dir: "/home/node"
-

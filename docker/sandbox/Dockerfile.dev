@@ -14,7 +14,7 @@ ENV TZ="${TIMEZONE}"
 
 RUN apt-get -qq -y update && apt-get -qq -y upgrade \
     && apt-get -qq -y install \
-        vim \
+        vim vim-gruvbox \
         curl \
         wget \
         apt-transport-https \
