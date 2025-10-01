@@ -70,13 +70,16 @@ history-clean CONTAINER:
     cd ..
     if [ ! -e .env ]; then
         echo ">>> Create .env file"
-        cp .env.dist .env
+        cp .env.example .env
     fi
-    uid=$(id -u)
-    gid=$(id -g)
-    sed -i "s/UID=.*/UID=$uid/" .env
-    sed -i "s/GID=.*/GID=$gid/" .env
+    # Set user and group ID to avoid permission issues
+    # Uncomment if needed 
+    #uid=$(id -u)
+    #gid=$(id -g)
+    #sed -i "s/UID=.*/UID=$uid/" .env
+    #sed -i "s/GID=.*/GID=$gid/" .env
 
     mkdir -p src/sandbox
-    mkdir -p data/tmp
+    mkdir -p data
+    cp -rn files data/tmp
     touch data/tmp/.bash_history
