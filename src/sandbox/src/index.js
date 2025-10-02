@@ -122,4 +122,112 @@ console.log(beverage); // Output: Juice
 const stupidValue = newAge < 18 ? true : "Juice";
 console.log(stupidValue); // Output: true
 
+// Switch statement example
+const wheel = "4";
+let vehicleType;
+switch (wheel) {
+  case 1: {
+    vehicleType = "Unicycle";
+    break;
+  }
+  case 2: {
+    vehicleType = "Bicycle";
+    break;
+  }
+  case 3: {
+    vehicleType = "Tricycle";
+    break;
+  }
+  case 4:
+  case "4": {
+    vehicleType = "Car";
+    break;
+  }
+  default: {
+    vehicleType = "Unknown vehicle type";
+    break;
+  }
+}
+console.log(vehicleType); // Output: Car
+
+// for loop example
+for (let i = 0; i < 50; i++) {
+  if (i % 10 === 0) {
+    continue; // Skip multiples of 10
+  }
+  if (i === 25) {
+    break; // Exit the loop when i is 25
+  }
+  console.log("Iteration:", i);
+}
+
+// for...of loop example
+const array = ["apple", "banana", "cherry"];
+for (const fruit of array) {
+  console.log("Fruit:", fruit);
+}
+// Output: Fruit: apple
+//         Fruit: banana
+//         Fruit: cherry
+
+// for...in loop example
+const person = {
+  name: "Alice",
+  age: 30,
+  city: "New York",
+};
+for (const key in person) {
+  console.log(key + ": " + person[key]);
+}
+
+// Output: name: Alice
+//         age: 30
+//         city: New York
+
+// Using Object.entries with for...of loop
+for (const [key, val] of Object.entries(person)) {
+  console.log(key + ": " + val);
+}
+// Output: name: Alice
+//         age: 30
+//         city: New York
+
+// while loop example
+let count = 0;
+while (count < 5) {
+  console.log("Count:", count);
+  count++;
+}
+// Output: Count: 0
+//         Count: 1
+//         Count: 2
+//         Count: 3
+//         Count: 4
+
+// do...while loop example
+let num = 0;
+do {
+  console.log("Number:", num);
+  num++;
+} while (num < 3);
+// Output: Number: 0
+//         Number: 1
+//         Number: 2
+
+// while loop with break and continue
+let n = 0;
+while (n < 10) {
+  if (n % 2 === 0) {
+    n++;
+    continue; // Skip even numbers
+  }
+  if (n === 7) {
+    break; // Exit the loop when n is 7
+  }
+  console.log("Odd Number:", n);
+  n++;
+}
+// Output: Odd Number: 1
+//         Odd Number: 3
+//         Odd Number: 5
 // End of the code
