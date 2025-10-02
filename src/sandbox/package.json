@@ -1,0 +1,18 @@
+{
+  "name": "dyma-learning",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Michel Kreutner <mkreutner@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "vite": "^7.1.7"
+  }
+}
