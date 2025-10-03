@@ -1,3 +1,5 @@
-import { numberDeclaration } from "./numbers.js";
+import { numberPlayground } from "./numbers.js";
+import { stringPlayerground } from "./strings.js";
 
-numberDeclaration();
+//numberPlayground();
+stringPlayerground();

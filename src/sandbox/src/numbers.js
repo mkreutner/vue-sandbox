@@ -1,5 +1,5 @@
-export const numberDeclaration = () => {
-  console.log("Welcome to Number Declaration.");
+export const numberPlayground = () => {
+  console.log("Welcome to Number Playground.");
 
   const firstNumber = 42;
   const objectNumberNumber = new Number(42);
