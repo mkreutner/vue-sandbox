@@ -25,4 +25,39 @@ export const stringPlayerground = () => {
   console.log(tlA);
   console.log(tlB);
   console.log(tlC);
+
+  const earth = "Earth";
+
+  for (let i = 0; i < earth.length; i++) {
+    console.log(earth[i]);
+  }
+
+  // Methods of String objects
+  const initialString = new String("My tailor is rich.");
+  const char0 = initialString.charAt(0);
+  const isFinishedByADot = initialString.endsWith(".");
+  const isStartedByMy = initialString.startsWith("My");
+  const indexOfIS = initialString.indexOf("is");
+  const isPoor = initialString.replace("is", "is not");
+  const sliceOfInitialString = initialString.slice(3, 9);
+
+  console.log(char0);
+  console.log(isFinishedByADot);
+  console.log(isStartedByMy);
+  console.log(indexOfIS);
+  console.log(initialString);
+  console.log(isPoor);
+  console.log(sliceOfInitialString);
+  console.log("                 kadsjgf   klasdjfg            ".trim());
+  console.log("banana,apple,pear,stawberry".split(","));
+
+  console.log(
+    "Dyma is very an excellent learning platform".split("").reverse().join("")
+  );
+  console.log(
+    "Dyma is very an excellent learning platform"
+      .replace("very", "the")
+      .replace("an excellent", "best")
+      .concat(" that I know!")
+  );
 };
