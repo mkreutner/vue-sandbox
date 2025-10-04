@@ -60,4 +60,34 @@ export const stringPlayerground = () => {
       .replace("an excellent", "best")
       .concat(" that I know!")
   );
+
+  // Regular Expression
+  const bananaString =
+    "Banana lovers love banana bread, banana smoothies, banana splits, and even banana hats—because bananas make everything better!";
+
+  const bananaOde = `Ode to the Banana
+
+In jungles deep where monkeys play,
+The banana grows in bright array.
+Yellow coats with spots of brown,
+Nature's snack, the best around.
+Banana pancakes in the morn,
+Banana jokes that make you yawn.
+Banana hats? A fashion trend!
+Banana love will never end.
+They slip, they slide, they make you grin,
+A fruit so sweet, it's always in.
+So here's to bananas, bold and bright,
+A golden joy, a tasty bite!
+  `;
+
+  const evaluateBanana = /banana/.test(bananaString);
+  console.log(evaluateBanana);
+  const evaluateApple = /apple/.test(bananaString);
+  console.log(evaluateApple);
+  const evaluateNumber = /\d/.test(bananaString);
+  console.log(evaluateNumber);
+  const evaluateDotComma = /(.*)[\.,]\s{1}/g.exec(bananaString);
+  console.log(evaluateDotComma);
+  console.log(bananaString.matchAll(/babana/gi));
 };
