@@ -5,8 +5,8 @@ export default defineConfig({
   build: {
     outDir: "./dist",
   },
-  //root: "./exercises/03/04",
-  root: "./",
+  root: "./exercises/05/04",
+  //root: "./",
   server: {
     host: "0.0.0.0",
     port: 8080,
