@@ -117,6 +117,11 @@ export const functionsPlayerground = () => {
   //#endregion
 
   //#region 05
+  const a = (b, c) => ({
+    [b]: c,
+    [c]: b,
+  });
 
+  console.log(a(1, 2));
   //#endregion
 };
