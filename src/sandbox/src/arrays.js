@@ -240,5 +240,11 @@ export const arraysPlayerground = () => {
   console.log(fpArrLower);
   console.log(fpArr2);
   console.log(fpArr2_Less1);
+
+  const total = fpArr2.reduce((acc, e, idx) => {
+    acc += e.quantity * e.unitPrice;
+    return acc;
+  }, 0);
+  console.log(total);
   //#endregion
 };
