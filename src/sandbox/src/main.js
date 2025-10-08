@@ -10,3 +10,4 @@ import { modulesPlayerground } from "./modules.js";
 // objectsPlayerground();
 // functionsPlayerground();'
 // arraysPlayerground();
+modulesPlayerground();
