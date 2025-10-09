@@ -3,14 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dyma Learning</title>
+    <script type="module" src="src/chap11/app.js"></script>
+    <title>Chapitre 11 : Le DOM</title>
   </head>
   <body>
-    <h1>Welcome to Dyma Learning Sandbox</h1>
-    <p>This is a simple HTML file served from the Docker container.</p>
-    <p>
-      Edit this file in the <code>src/sandbox</code> directory to see changes.
-    </p>
-    <script type="module" src="/src/main.js"></script>
+    <section>
+      <h1>Chapitre 11 : Le DOM</h1>
+      <img
+        id="myImage"
+        src="src/chap11/images/flower.jpg"
+        alt="flower alternate text"
+        data-name="flower"
+      />
+      <p>Ceci est un paragraphe qui contient un <a href="#">lien</a>.</p>
+      <ul>
+        <li class="item-mnu selected">1</li>
+        <li class="item-mnu">2</li>
+        <li class="item-mnu">3</li>
+        <li class="item-mnu">4</li>
+        <li class="item-mnu">5</li>
+        <li class="item-mnu">6</li>
+      </ul>
+      <div class="form-group">
+        <label for="iFirstName">Firstname:</label>
+        <input type="text" name="iFirstName" id="iFirstName" />
+      </div>
+      <div class="form-group">
+        <label for="iLastName">Lastname:</label>
+        <input type="text" name="iLastName" id="iLastName" />
+      </div>
+      <div class="form-group">
+        <input type="button" value="OK" name="bOK" id="bOK" />
+        <input type="button" value="Change Image" name="bChgImg" id="bChgImg" />
+      </div>
+    </section>
   </body>
 </html>
