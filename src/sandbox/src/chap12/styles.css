@@ -1,0 +1,36 @@
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-flow: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+div {
+  width: 800px;
+  height: 200px;
+  background-color: lightgray;
+}
+
+.title {
+  height: auto;
+  border: 1px solid green;
+  background-color: lightslategrey;
+  color: blanchedalmond;
+}
+
+.app {
+  border: 1px solid green;
+}
+
+#parentBC {
+  border: 1px solid brown;
+}
+
+#childBC {
+  border: 1px solid lightcoral;
+}

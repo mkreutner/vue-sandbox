@@ -3,55 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="src/chap11/app.js"></script>
-    <title>Chapitre 11 : Le DOM</title>
+    <script type="module" src="src/chap12/app.js"></script>
+    <title>Chapitre 12 : Les Évènements</title>
   </head>
   <body>
-    <div class="main-container">
-      <section id="mainSection">
-        <h1>Chapitre 11 : Le DOM</h1>
-        <img
-          id="myImage"
-          src="src/chap11/images/flower.jpg"
-          alt="flower alternate text"
-          data-name="flower"
-          class="img-primary"
-        />
-        <p>Ceci est un paragraphe qui contient un <a href="#">lien</a>.</p>
-        <ul>
-          <li class="item-mnu selected">1</li>
-          <li class="item-mnu">2</li>
-          <li class="item-mnu">3</li>
-          <li class="item-mnu">4</li>
-          <li class="item-mnu">5</li>
-          <li class="item-mnu">6</li>
-        </ul>
-        <div class="form-group">
-          <label for="iFirstName">Firstname:</label>
-          <input type="text" name="iFirstName" id="iFirstName" />
-        </div>
-        <div class="form-group">
-          <label for="iLastName">Lastname:</label>
-          <input type="text" name="iLastName" id="iLastName" />
-        </div>
-        <div class="form-group">
-          <input type="button" value="OK" name="bOK" id="bOK" />
-          <input
-            type="button"
-            value="Change Image"
-            name="bChgImg"
-            id="bChgImg"
-          />
-          <input
-            type="button"
-            value="Alert User"
-            name="bAlertUser"
-            id="bAlertUser"
-          />
-          <input type="button" value="Login me" name="Login me" id="bLoginMe" />
-        </div>
-      </section>
-      <div id="mainApp"></div>
+    <div class="title">
+      <h1>Chapitre 12 : Les Évènements</h1>
+    </div>
+    <div class="app">
+      <div class="app" id="eventsApp"></div>
+    </div>
+    <div>
+      <input type="button" id="btnTriggerEvent" value="Trigger Event" />
+    </div>
+    <div class="app">
+      <h1>Le bouillonnement et la capture</h1>
+      <div id="parentBC">
+        <div id="childBC"></div>
+      </div>
+    </div>
+    <div class="app">
+      <form id="formEvent">
+        <input type="text" id="inFormEvent" />
+        <button type="submit">Go !</button>
+      </form>
     </div>
   </body>
 </html>
