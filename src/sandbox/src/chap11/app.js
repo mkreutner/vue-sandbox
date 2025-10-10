@@ -1,3 +1,5 @@
+import "./styles.css";
+
 // console.log(navigator.userAgent);
 // console.log(`${screen.width} x ${screen.height}`);
 // console.log(location.origin);
@@ -25,4 +27,14 @@ function changeImg(event) {
   img.height = height;
 }
 
+function alertUser(event) {
+  const section = document.querySelector("#mainSection");
+  const alertUser = document.querySelector("#bAlertUser");
+  section.classList.toggle("bg-alert");
+  alertUser.value = section.classList.contains("bg-alert")
+    ? "Unalert User"
+    : "Alert User";
+}
+
 document.querySelector("#bChgImg").addEventListener("click", changeImg);
+document.querySelector("#bAlertUser").addEventListener("click", alertUser);

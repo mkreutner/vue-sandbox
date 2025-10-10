@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  box-sizing: content-box;
+}
+
+input[type="button"] {
+  background-color: aliceblue;
+  border-radius: 5px;
+  width: 100px;
+}
+
+.main-container {
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 5px;
+  width: 75%;
+  background-color: silver;
+}
+
+.img-primary {
+  border: 1px solid green;
+  border-radius: 5px;
+}
+
+.bg-alert {
+  background-color: red;
+}
