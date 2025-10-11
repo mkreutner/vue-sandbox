@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
 }
 
 body {
@@ -37,6 +38,7 @@ button {
   border-radius: 5px;
   margin: 0px 3px;
   cursor: pointer;
+  outline: 0;
 }
 
 input {
@@ -59,6 +61,7 @@ ul {
 li {
   display: flex;
   align-items: center;
+  padding: 5px 0px;
 }
 
 li p {

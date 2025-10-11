@@ -7,11 +7,18 @@
   </head>
   <body>
     <div class="container">
-      <form>
-        <input type="text" name="" id="" />
-        <button>Add</button>
+      <form name="formAddTodo" id="formAddTodo">
+        <input type="text" name="inNewTodo" id="inNewTodo" />
+        <button name="btnAddNewTodo" id="btnAddNewTodo">Add</button>
+        <button name="btnClearTodoList" id="btnClearTodoList">
+          Clear Todos List
+        </button>
       </form>
+      <div>
+        <ul id="lstTodos"></ul>
+      </div>
     </div>
+
     <script type="module" src="src/project01/app.js"></script>
   </body>
 </html>
