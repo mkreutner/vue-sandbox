@@ -3,30 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="src/chap12/app.js"></script>
-    <title>Chapitre 12 : Les Évènements</title>
+    <title>Projet 01 : Todo</title>
   </head>
   <body>
-    <div class="title">
-      <h1>Chapitre 12 : Les Évènements</h1>
-    </div>
-    <div class="app">
-      <div class="app" id="eventsApp"></div>
-    </div>
-    <div>
-      <input type="button" id="btnTriggerEvent" value="Trigger Event" />
-    </div>
-    <div class="app">
-      <h1>Le bouillonnement et la capture</h1>
-      <div id="parentBC">
-        <div id="childBC"></div>
+    <div class="container">
+      <form name="formAddTodo" id="formAddTodo">
+        <input type="text" name="inNewTodo" id="inNewTodo" />
+        <button name="btnAddNewTodo" id="btnAddNewTodo">Add</button>
+        <button name="btnClearTodoList" id="btnClearTodoList">
+          Clear Todos List
+        </button>
+      </form>
+      <div>
+        <ul id="lstTodos"></ul>
       </div>
     </div>
-    <div class="app">
-      <form id="formEvent">
-        <input type="text" id="inFormEvent" />
-        <button type="submit">Go !</button>
-      </form>
+
+    <script type="module" src="src/project01/app.js"></script>
+
+    <!-- Edit modal -->
+    <div id="modalEdit" class="modal">
+      <div class="modal-body">
+        <div id="modalTitle"></div>
+        <div class="inputArea">
+          <input type="text" id="inTodoText" />
+        </div>
+        <div class="modalAction">
+          <button id="btnValidModal">Apply</button>
+          <button id="btnCloseModal">Close</button>
+        </div>
+      </div>
     </div>
   </body>
 </html>
