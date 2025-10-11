@@ -3,7 +3,18 @@ import "./styles.css";
 const lstTodos = document.querySelector("#lstTodos");
 const formAddTodo = document.querySelector("#formAddTodo");
 const inNewTodo = document.querySelector("#formAddTodo > #inNewTodo");
-const btnClearTodoList = document.querySelector("#btnClearTodoList");
+const modal = document.querySelector("#modalEdit");
+const divTitle = modal.querySelector("#modalEdit > .modal-body > #modalTitle");
+const inTodoText = modal.querySelector(
+  "#modalEdit > .modal-body > .inputArea > #inTodoText"
+);
+const buttonValid = modal.querySelector(
+  "#modalEdit > .modal-body > .modalAction > #btnValidModal"
+);
+const buttonClose = modal.querySelector(
+  "#modalEdit > .modal-body > .modalAction > #btnCloseModal"
+);
+
 /**
  * Liste of ToDo(s)
  */
@@ -42,6 +53,35 @@ const displayTodo = () => {
   lstTodos.append(...todosNode);
 };
 
+// open modal by id
+function openModal(idx) {
+  divTitle.innerText = `Edit todo ${idx}: ${todosList[idx].text}`;
+  inTodoText.value = todosList[idx].text;
+
+  buttonValid.addEventListener(
+    "click",
+    (event) => {
+      todosList[idx].text = inTodoText.value;
+      closeModal(event);
+    },
+    { once: true }
+  );
+  buttonClose.addEventListener(
+    "click",
+    (event) => {
+      closeModal(event);
+    },
+    { once: true }
+  );
+  modal.classList.add("open");
+}
+
+// close currently open modal
+function closeModal(event) {
+  modal.classList.remove("open");
+  displayTodo();
+}
+
 /**
  *
  * @param {*} todo
@@ -58,16 +98,27 @@ const createToDoElement = (todo, idx) => {
   p.innerHTML = todo.text;
   const btnEdit = document.createElement("button");
   btnEdit.textContent = "Edit";
+  btnEdit.id = `btnEdit-${padIdx}`;
+  btnEdit.dataset.todoNumber = idx;
+  btnEdit.addEventListener("click", (event) => {
+    event.stopPropagation();
+    openModal(idx);
+  });
   const btnDelete = document.createElement("button");
   btnDelete.textContent = "Delete";
   btnDelete.id = `btnDelete-${padIdx}`;
-  btnDelete.dataset.totoNumber = idx;
+  btnDelete.dataset.todoNumber = idx;
   btnDelete.addEventListener("click", (event) => {
+    event.stopPropagation();
     removeTodoFromList(idx);
   });
   const li = document.createElement("li");
   li.id = `todo-${padIdx}`;
   li.append(span, p, btnEdit, btnDelete);
+  li.addEventListener("click", (event) => {
+    event.stopPropagation();
+    toggleTodo(idx);
+  });
 
   return li;
 };
@@ -81,6 +132,7 @@ const addNewTodoInList = (todoText) => {
     text: todoText,
     done: false,
   });
+  displayTodo();
 };
 
 /**
@@ -92,6 +144,11 @@ const removeTodoFromList = (idx) => {
   displayTodo();
 };
 
+const toggleTodo = (idx) => {
+  todosList[idx].done = !todosList[idx].done;
+  displayTodo();
+};
+
 /**
  * Callback when user wants to add new a new toDo
  * @param {*} event
@@ -99,7 +156,6 @@ const removeTodoFromList = (idx) => {
 const sumbitFormTodoCallback = (event) => {
   // Stop propagation
   event.preventDefault();
-  console.log(event.submitter.id);
   // Retreive todo text value
   const value = inNewTodo.value;
   // Clear current input
@@ -108,8 +164,6 @@ const sumbitFormTodoCallback = (event) => {
     // Add new toto in ToDo list
     addNewTodoInList(value);
   }
-  // Refresh the ToDo list
-  displayTodo();
 };
 
 /** Main App */
