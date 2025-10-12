@@ -12,5 +12,7 @@ Dyma VueJS Sandbox
 1. Initialize the project: `just setup`
 2. Lunch the stack: `just up`
 3. Enter to playing room: `just shell`
+4. **In the node container**, goto workspace directory: `cd workspace`
+5. **In the node container**, launch server: `npm start`
 
 Enjoy !
