@@ -3,7 +3,9 @@ import "./styles.css";
 const runL101 = false; // Introduction à l'asynchrone et timers
 const runL102 = false; // Les promesses (Promises always promises :D)
 const runL103 = false; // Chaîner les promesses (Unleash the promises :D)
-const runL104 = true; // Le méthodes des promesses
+const runL104 = false; // Les méthodes des promesses
+const runL105 = false; // Les fonctions asynchrones avec async / await
+const runL106 = true; // Event Loop
 
 //#region Introduction à l'asynchrone et timers
 if (runL101) {
@@ -211,5 +213,56 @@ if (runL104) {
     resolve("Hello");
   }, 8000);
   promise.then((result) => console.log(result));
+}
+//#endregion
+
+//#region Les fonctions asynchrones avec async / await
+if (runL105) {
+  const prom01 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("prom01");
+    }, 5000);
+  });
+  /*
+  async function func() {
+    try {
+      const value = await prom01;
+      return value;
+    } catch (e) {
+      throw `Shit happens! ... ${e}`;
+    }
+  }
+
+  func()
+    .then((result) => console.log(`Resolved: ${result}`))
+    .catch((error) => console.error(`Error: ${error}`));
+*/
+  console.log("Nothing is blocked....");
+
+  // top level await
+  const vvv = await prom01;
+  console.log(vvv);
+}
+//#endregion
+
+//#region Event Loop
+if (runL106) {
+  console.log("Start");
+
+  setTimeout(() => console.log("Timeout 2000"), 2000);
+
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => resolve(), 4000);
+  });
+
+  promise.then(() => {
+    console.log("promise 4000");
+  });
+
+  Promise.resolve().then(() => console.log("promise 0"));
+
+  setTimeout(() => console.log("Timeout 0"), 0);
+
+  console.log("End");
 }
 //#endregion
