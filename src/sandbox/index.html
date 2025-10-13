@@ -7,7 +7,50 @@
   </head>
   <body>
     <div>
-      <ul id="chap15"></ul>
+      <form id="formCreateUser">
+        <div class="form-group">
+          <div class="form-col-4">
+            <label for="inputFirstname">Firstname</label>
+          </div>
+          <div div class="form-col-8">
+            <input
+              type="text"
+              id="inputFirstname"
+              name="firstname"
+              placeholder="Firstname"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-col-4">
+            <label for="inputLastname">Lastname</label>
+          </div>
+          <div div class="form-col-8">
+            <input
+              type="text"
+              id="inputLastname"
+              name="lastname"
+              placeholder="Lastname"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div div class="form-col-4">
+            <label for="inputPicture">Picture</label>
+          </div>
+          <div div class="form-col-8">
+            <input type="file" id="inputPicture" name="picture" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="offset-form-col-4 form-col-8">
+            <button type="submit">Create</button>
+            <button type="reset">Reset</button>
+          </div>
+        </div>
+      </form>
     </div>
     <script type="module" src="./src/chap15/app.js"></script>
   </body>
