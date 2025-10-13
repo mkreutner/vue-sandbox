@@ -8,7 +8,9 @@ const runL111 = false; // Les CORS
 const runL112 = false; // Options avancées des requêtes fetch
 const runL113 = false; // Annuler des requêtes en cours
 const runL114 = false; // Les objets FormData
-const runL115 = true; // La Web API URL
+const runL115 = false; // La Web API URL
+const runL116 = false; // XMLHttpRequest
+const runL117 = true; // XMLHttpRequest avancée
 
 //#region Première requête HTTP avec fetch
 if (runL109) {
@@ -184,5 +186,75 @@ if (runL114) {
 
 //#region La Web API URL
 if (runL115) {
+}
+//#endregion
+
+//#region XMLHttpRequest
+if (runL116) {
+  const xhrGet = new XMLHttpRequest();
+
+  xhrGet.open("GET", `${baseUrl}todos`);
+  xhrGet.responseType = "json";
+  xhrGet.send();
+
+  xhrGet.addEventListener("load", (response) => {
+    console.log(response);
+    const data = xhrGet.response;
+    console.log(data);
+  });
+  xhrGet.addEventListener("error", (error) => {
+    console.error(error);
+  });
+  xhrGet.addEventListener("progress", (inProgress) => {
+    console.info(inProgress);
+  });
+
+  const xhrPost = new XMLHttpRequest();
+  const newTodo = {
+    tache: "Ajouter une task via XMLHttpRequest",
+    status_id: 1,
+    create_date: "2025-10-01T09:00:00Z",
+    update_date: "2025-10-05T14:30:00Z",
+    create_user_id: 1,
+    update_user_id: 3,
+    assigned_user_id: 1,
+  };
+
+  xhrPost.open("POST", `${baseUrl}todos`);
+  xhrPost.responseType = "json";
+  xhrPost.setRequestHeader("Content-Type", "application/json");
+  xhrPost.send(JSON.stringify(newTodo));
+
+  xhrPost.addEventListener("load", (response) => {
+    console.log(response);
+    const data = xhrPost.response;
+    console.log(data);
+  });
+  xhrPost.addEventListener("error", (error) => {
+    console.error(error);
+  });
+  xhrPost.addEventListener("progress", (inProgress) => {
+    console.info(inProgress);
+  });
+}
+//#endregion
+
+//#region Utilisation avancées de XMLHttpRequest
+if (runL117) {
+  const xhrGet = new XMLHttpRequest();
+
+  xhrGet.open("GET", `${baseUrl}todos`);
+  xhrGet.responseType = "json";
+  xhrGet.timeout = 1000;
+
+  xhrGet.addEventListener("timeout", (event) => {
+    console.info(event);
+  });
+  xhrGet.addEventListener("abort", (event) => {
+    console.info(event);
+  });
+
+  xhrGet.send();
+  xhrGet.abort();
 }
 //#endregion
