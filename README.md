@@ -16,3 +16,8 @@ Dyma VueJS Sandbox
 5. **In the node container**, launch server: `npm start`
 
 Enjoy !
+
+## Usefull links
+
+- [{JSON}Placeholder](https://jsonplaceholder.typicode.com/): Free fake and reliable API for testing and prototyping.
+- [My Json Server](https://my-json-server.typicode.com/): Fake Online REST server for teams
