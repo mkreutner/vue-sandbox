@@ -17,15 +17,19 @@
     transition: box-shadow 0.2s;
   }
   &-primary {
-    border: 1px solid var(--primary);
-
+    border: 1px solid var(--divider);
     background-color: var(--primary);
     color: var(--text-light);
   }
   &-secondary {
-    border: 1px solid var(--primary);
+    border: 1px solid var(--divider);
     background-color: var(--secondary);
     color: var(--primary);
+  }
+  &-danger {
+    border: 1px solid var(--divider);
+    background-color: var(--danger);
+    color: var(--text-light);
   }
 }
 
