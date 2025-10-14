@@ -1,6 +1,10 @@
 import "/assets/styles/styles.scss";
 import "./form.scss";
 
+// API Dyma
+const baseURL = `https://restapi.fr/api/`;
+const collectionName = `mkr-articles`;
+
 // Retreive form
 const formNewArticle = document.querySelector("#formNewArticle");
 const listErrors = document.querySelector("#listErrors");
@@ -18,7 +22,7 @@ const isValidForm = (article) => {
   return !errorsList.length;
 };
 
-formNewArticle.addEventListener("submit", (event) => {
+formNewArticle.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const formData = new FormData(formNewArticle);
@@ -34,10 +38,21 @@ formNewArticle.addEventListener("submit", (event) => {
 
   const article = Object.fromEntries(formData.entries());
   if (isValidForm(article)) {
-    const jsonData = JSON.stringify(article);
-    console.log(jsonData);
-    listErrors.innerHTML = "";
-    // Fetch form
+    try {
+      const jsonData = JSON.stringify(article);
+      listErrors.innerHTML = "";
+      // Fetch form
+      const response = await fetch(`${baseURL}${collectionName}`, {
+        method: "POST",
+        body: jsonData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const body = await response.json();
+    } catch (err) {
+      console.error(`An error occurs: ${err}`);
+    }
   } else {
     listErrors.innerHTML = "";
     errorsList.forEach((err) => {
