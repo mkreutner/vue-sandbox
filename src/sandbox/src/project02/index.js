@@ -36,22 +36,23 @@ const createArticle = (article) => {
   const divActions = document.createElement("div");
   divActions.classList.add("article-actions");
 
-  const btnReset = document.createElement("button");
-  btnReset.classList.add("btn");
-  btnReset.classList.add("btn-danger");
-  btnReset.innerHTML = "Delete";
-  btnReset.setAttribute("data-id", article._id);
-  btnReset.setAttribute("type", "reset");
+  const btnDelete = document.createElement("button");
+  btnDelete.classList.add("btn");
+  btnDelete.classList.add("btn-danger");
+  btnDelete.innerHTML = "Delete";
+  btnDelete.setAttribute("data-id", article._id);
+  btnDelete.addEventListener("click", (event) => {
+    deleteArticle(article._id);
+  });
 
-  const btnSubmit = document.createElement("button");
-  btnSubmit.classList.add("btn");
-  btnSubmit.classList.add("btn-primary");
-  btnSubmit.innerHTML = "Edit";
-  btnSubmit.setAttribute("disabled", "");
-  btnSubmit.setAttribute("data-id", article._id);
-  btnSubmit.setAttribute("type", "submit");
+  const btnEdit = document.createElement("button");
+  btnEdit.classList.add("btn");
+  btnEdit.classList.add("btn-primary");
+  btnEdit.innerHTML = "Edit";
+  btnEdit.setAttribute("disabled", "");
+  btnEdit.setAttribute("data-id", article._id);
 
-  divActions.append(btnReset, btnSubmit);
+  divActions.append(btnDelete, btnEdit);
 
   divArticle.append(
     image,
@@ -63,6 +64,19 @@ const createArticle = (article) => {
   );
 
   return divArticle;
+};
+
+const deleteArticle = async (id) => {
+  try {
+    const response = await fetch(`${baseURL}${collectionName}/${id}`, {
+      method: "DELETE",
+    });
+    const body = await response.json();
+    console.log(body);
+    fetchArticles();
+  } catch (err) {
+    console.error(`An error occurs: ${err}`);
+  }
 };
 
 // Create articles list
