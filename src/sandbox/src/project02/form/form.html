@@ -13,7 +13,41 @@
   </head>
   <body>
     <div class="container">
-      <a href="/">Home</a>
+      <header>
+        <a class="header-brand" href="/">Blog</a>
+        <ul>
+          <li>
+            <a class="header-nav" href="/">Home</a>
+          </li>
+          <li>
+            <a class="header-nav active" href="./form/form.html"
+              >Add new article</a
+            >
+          </li>
+        </ul>
+      </header>
+      <div class="content">
+        <form>
+          <h2 class="title-underline">Add an article</h2>
+          <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" />
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" name="category" id="category" />
+          </div>
+          <div class="form-group">
+            <label for="content">Article</label>
+            <textarea name="content" id="content"></textarea>
+          </div>
+          <div class="form-btn-container">
+            <button class="btn btn-secondary">Cancel</button>
+            <button class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+      <footer>&copy; blog 2025</footer>
     </div>
     <script type="module" src="./form.js"></script>
   </body>
