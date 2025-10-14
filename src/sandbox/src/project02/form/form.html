@@ -27,7 +27,7 @@
         </ul>
       </header>
       <div class="content">
-        <form>
+        <form id="formNewArticle">
           <h2 class="title-underline">Add an article</h2>
           <div class="form-group">
             <label for="author">Author</label>
@@ -41,9 +41,10 @@
             <label for="content">Article</label>
             <textarea name="content" id="content"></textarea>
           </div>
+          <ul class="text-error" id="listErrors"></ul>
           <div class="form-btn-container">
-            <button class="btn btn-secondary">Cancel</button>
-            <button class="btn btn-primary">Save</button>
+            <button type="reset" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
           </div>
         </form>
       </div>
