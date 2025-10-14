@@ -13,16 +13,17 @@ const createArticle = (article) => {
   divArticle.classList.add("article");
 
   const image = document.createElement("img");
-  image.src = article.picture_url;
+  image.src =
+    article.picture_url ?? "https://randomuser.me/api/portraits/lego/6.jpg";
   image.alt = "Author picture";
 
   const title = document.createElement("h2");
   title.classList.add("article-title");
-  title.innerHTML = article.title;
+  title.innerHTML = article.title ?? "Without Title";
 
   const divAuthor = document.createElement("div");
   divAuthor.classList.add("article-author");
-  divAuthor.innerHTML = article.author;
+  divAuthor.innerHTML = article.author ?? "Inconnu";
 
   const divCategory = document.createElement("div");
   divCategory.classList.add("article-category");
