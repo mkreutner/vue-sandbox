@@ -1,6 +1,6 @@
 import "/assets/styles/styles.scss";
-import "./form.scss";
+import "./index.scss";
 
 import "/assets/js/topbar.js";
 
-console.log("-= FORM =-");
+console.log("-= INDEX =-");
