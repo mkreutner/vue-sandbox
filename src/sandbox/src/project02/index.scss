@@ -11,6 +11,7 @@
       background-color: white;
       padding: 0 5rem;
       border-radius: 0.3rem;
+      margin-bottom: 5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -32,6 +33,7 @@
       }
       &-content {
         max-width: 550px;
+        white-space: pre-line;
       }
       &-actions {
         width: 100%;
@@ -42,6 +44,9 @@
         border-top: 1px solid var(--divider);
         .btn {
           margin-left: 10px;
+          &:disabled {
+            cursor: not-allowed;
+          }
         }
       }
     }

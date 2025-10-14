@@ -24,6 +24,6 @@ Ces droits peuvent être simplement disponibles — cas du domaine public — ou
 Les logiciels libres constituent une alternative à ceux qui ne le sont pas, qualifiés de « propriétaires » ou de « privateurs »[Note 1]. Ces derniers sont alors considérés par une partie de la communauté du logiciel libre comme étant l'instrument d'un pouvoir injuste, en permettant au développeur de contrôler l'utilisateur[4].
 
 Author: Michel
-Category: Generale
+Category: General
 Content:
 La culture générale, appelée également culture « G », désigne les connaissances en tout genre d'un individu, sans spécialisation. S'opposant à la connaissance disciplinaire, elle fait partie du projet humaniste, qui trouve ses origines dans la paideia grecque. Traduite par Cicéron sous le terme d'« humanitas », elle se mêle, lors de la Renaissance artistique, aux arts libéraux. Le projet d’une culture générale est intrinsèquement lié à des réflexions à propos de l'humanité, qu'elle soit conçue comme nature humaine ou comme dépassement de la nature par la culture (ou « seconde nature »). Durant la Renaissance, elle forme l'idéal de l'« honnête homme ».
