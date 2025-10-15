@@ -24,23 +24,60 @@ header {
   justify-content: space-between;
   align-items: center;
   a {
-    color: white;
+    color: var(--grey000);
   }
   .header-brand {
     font-size: 4rem;
     font-weight: 700;
   }
-  ul {
-    display: flex;
-    li {
-      .header-nav {
-        font-size: 1.8rem;
-        padding: 0 10px;
+  .header-menu {
+    position: relative;
+    ul {
+      display: flex;
+      @include xs {
+        display: none;
       }
-      .active {
-        font-weight: 700;
-        text-decoration: underline;
+      li {
+        .header-nav {
+          font-size: 1.8rem;
+          padding: 0 10px;
+        }
+        .active {
+          font-weight: 700;
+          text-decoration: underline;
+        }
       }
+    }
+    &-icon {
+      display: none;
+      font-size: 3rem;
+      color: var(--grey000);
+      @include xs {
+        display: block;
+      }
+    }
+    &-mobile {
+      display: none;
+      position: absolute;
+      box-shadow: var(--box-shadow);
+      border-radius: 0.3rem;
+      top: 6.5rem;
+      right: 1rem;
+      padding: 2rem 1.5rem;
+      width: 20rem;
+      background-color: var(--grey000);
+      ul {
+        display: block;
+        li {
+          margin: 1rem 0;
+          a {
+            color: var(--text);
+          }
+        }
+      }
+    }
+    &-mobile.open {
+      display: block;
     }
   }
 }
