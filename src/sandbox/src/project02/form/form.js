@@ -22,6 +22,11 @@ const isValidForm = (article) => {
   return !errorsList.length;
 };
 
+formNewArticle.addEventListener("reset", async (event) => {
+  event.preventDefault();
+  location.assign("/");
+});
+
 formNewArticle.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -49,7 +54,9 @@ formNewArticle.addEventListener("submit", async (event) => {
           "Content-Type": "application/json",
         },
       });
-      const body = await response.json();
+      if (response.status < 299) {
+        location.assign("/");
+      }
     } catch (err) {
       console.error(`An error occurs: ${err}`);
     }

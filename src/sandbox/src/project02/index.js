@@ -24,6 +24,14 @@ const createArticle = (article) => {
   const divAuthor = document.createElement("div");
   divAuthor.classList.add("article-author");
   divAuthor.innerHTML = article.author ?? "Inconnu";
+  divAuthor.innerHTML +=
+    " - " +
+    new Date(article.createdAt).toLocaleDateString("fr-FR", {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
 
   const divCategory = document.createElement("div");
   divCategory.classList.add("article-category");
