@@ -5,7 +5,8 @@ const baseUrl = "https://my-json-server.typicode.com/mkreutner/data-mock/";
 const runL131 = false; // Déclarer une date en Javascript
 const runL132 = false; // Les formats des Dates en chaîne de caractères
 const runL133 = false; // Manipuler des timestamps
-const runL134 = true; // L'API des objets Date
+const runL134 = false; // L'API des objets Date
+const runL135 = true; // Affichage des dates
 
 //#region Déclarer une date en Javascript
 if (runL131) {
@@ -64,5 +65,43 @@ if (runL133) {
 
 //#region L'API des objets Date
 if (runL134) {
+  const isoDate = "1975-12-05T08:42:00.000Z";
+  const date = new Date(isoDate);
+  console.log(date.getFullYear());
+  console.log(date.getMonth()); // Month begin at 00
+  console.log(date.getDay()); // Day of the week
+  console.log(date.getDate(), date.getUTCDate()); // Day of the month
+
+  const isoDate2 = "1975-12-31T08:42:00.000Z";
+  const date2 = new Date(isoDate2);
+  console.log(date2);
+  date2.setDate(date2.getDate() + 1);
+  console.log(date2);
+
+  const isoDate3 = "1975-12-31T08:42:00.000Z";
+  const date3 = new Date(isoDate3);
+  console.log(date3.toJSON());
+}
+//#endregion
+
+//#region Affichage des dates
+if (runL135) {
+  const isoDate = "1975-12-05T08:42:00.000Z";
+  const date = new Date(isoDate);
+  // console.log(date);
+  // console.log(date.toDateString());
+  // console.log(date.toTimeString());
+  // console.log(date.toLocaleTimeString("fr-FR"));
+  // console.log(date.toLocaleString("fr-FR"));
+  console.log(
+    date
+      .toLocaleDateString("fr-FR", {
+        day: "2-digit",
+        weekday: "long",
+        month: "long",
+        year: "numeric",
+      })
+      .toLocaleUpperCase()
+  );
 }
 //#endregion
