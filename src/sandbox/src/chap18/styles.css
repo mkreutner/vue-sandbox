@@ -1,0 +1,14 @@
+a {
+  color: beige;
+  text-decoration: none;
+}
+
+.big {
+  height: 100vh;
+  background-color: blueviolet;
+}
+
+.little {
+  height: 50vh;
+  background-color: violet;
+}
