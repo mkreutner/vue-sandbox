@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project 02: Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli:300,400,700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/b8910cf44b.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a class="header-brand" href="/">Blog</a>
+        <div class="header-menu">
+          <ul>
+            <li>
+              <a class="header-nav" href="/">Home</a>
+            </li>
+            <li>
+              <a class="header-nav active" href="./form/form.html">
+                Add new article
+              </a>
+            </li>
+          </ul>
+          <div class="header-menu-icon">
+            <i class="fa-solid fa-bars"></i>
+          </div>
+        </div>
+      </header>
+      <div class="content">
+        <form id="formNewArticle">
+          <h2 class="title-underline">Add an article</h2>
+          <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" />
+          </div>
+          <div class="form-group">
+            <label for="pictureUrl">Picture URL</label>
+            <input type="text" name="picture_url" id="pictureUrl" />
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" name="category" id="category" />
+          </div>
+          <div class="form-group">
+            <label for="title">Article Title</label>
+            <input type="text" name="title" id="title" />
+          </div>
+          <div class="form-group">
+            <label for="content">Article</label>
+            <textarea name="content" id="content"></textarea>
+          </div>
+          <ul class="text-error" id="listErrors"></ul>
+          <div class="form-btn-container">
+            <button type="reset" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+      <footer>&copy; blog 2025</footer>
+    </div>
+    <script type="module" src="./form.js"></script>
+    <script type="module" src="/assets/js/topbar.js"></script>
+  </body>
+</html>
