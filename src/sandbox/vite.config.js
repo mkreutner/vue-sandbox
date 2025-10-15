@@ -14,8 +14,8 @@ export default defineConfig({
     },
   },
   // root: "./exercises/08/06",
-  root: "./src/project02/",
-  // root: "./",
+  // root: "./src/project02/",
+  root: "./",
   server: {
     host: "0.0.0.0",
     port: 8080,
