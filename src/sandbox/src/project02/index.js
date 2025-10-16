@@ -1,6 +1,8 @@
 import "/assets/styles/styles.scss";
 import "./index.scss";
 
+import { confirmModal } from "/assets/js/modal.js";
+
 // API Dyma
 const baseURL = `https://restapi.fr/api/`;
 const collectionName = `mkr-articles`;
@@ -8,9 +10,16 @@ const collectionName = `mkr-articles`;
 const divArticlesContainer = document.querySelector(".articles-container");
 const divCategories = document.querySelector(".categories");
 const divSelectedCategory = document.querySelector(".selected-category");
+const selectSorting = document.querySelector(".sorting");
 
 let articles;
 let categories;
+let sortingBy = "desc";
+
+selectSorting.addEventListener("change", (event) => {
+  sortingBy = selectSorting.value;
+  fetchArticles();
+});
 
 // Create one article container
 const createArticle = (article) => {
@@ -82,14 +91,19 @@ const createArticle = (article) => {
 };
 
 const deleteArticle = async (id) => {
-  try {
-    const response = await fetch(`${baseURL}${collectionName}/${id}`, {
-      method: "DELETE",
-    });
-    const body = await response.json();
-    fetchArticles();
-  } catch (err) {
-    console.error(`An error occurs: ${err}`);
+  const answer = await confirmModal(
+    "Are you sure you want to delete this article?"
+  );
+  if (answer === true) {
+    try {
+      const response = await fetch(`${baseURL}${collectionName}/${id}`, {
+        method: "DELETE",
+      });
+      const body = await response.json();
+      fetchArticles();
+    } catch (err) {
+      console.error(`An error occurs: ${err}`);
+    }
   }
 };
 
@@ -170,7 +184,9 @@ const createCategories = (articles) => {
 // Retrive list of articles
 const fetchArticles = async () => {
   try {
-    const repsonse = await fetch(`${baseURL}${collectionName}`);
+    const repsonse = await fetch(
+      `${baseURL}${collectionName}?sort=createdAt:${sortingBy}`
+    );
     articles = await repsonse.json();
     categories = createCategoriesElements(createCategories(articles));
 

@@ -10,12 +10,23 @@
     flex: 0 0 25rem;
     padding: 0 2rem 2rem 2rem;
     .selected-category {
-      padding: 0.25rem;
+      padding: 1rem;
+      margin-bottom: 2rem;
       background-color: var(--selected);
       border-radius: 0.3rem;
       box-shadow: var(--box-shadow);
       text-align: center;
       font-weight: 700;
+    }
+    .sorting {
+      width: 100%;
+      margin-bottom: 2rem;
+      border-radius: 0.3rem;
+      background-color: white;
+      border: 0;
+      box-shadow: var(--box-shadow);
+      outline: 0;
+      padding: 1rem;
     }
     .categories {
       padding: 2rem;

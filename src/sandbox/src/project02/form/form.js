@@ -1,6 +1,8 @@
 import "/assets/styles/styles.scss";
 import "./form.scss";
 
+import { confirmModal } from "/assets/js/modal.js";
+
 // API Dyma
 const baseURL = `https://restapi.fr/api/`;
 const collectionName = `mkr-articles`;
@@ -48,7 +50,12 @@ const isValidForm = (article) => {
 
 formNewArticle.addEventListener("reset", async (event) => {
   event.preventDefault();
-  location.assign("/");
+  const answer = await confirmModal(
+    "Are you sure you want to abandon editing this article?"
+  );
+  if (answer === true) {
+    location.assign("/");
+  }
 });
 
 formNewArticle.addEventListener("submit", async (event) => {
