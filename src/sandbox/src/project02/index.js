@@ -57,8 +57,10 @@ const createArticle = (article) => {
   btnEdit.classList.add("btn");
   btnEdit.classList.add("btn-primary");
   btnEdit.innerHTML = "Edit";
-  btnEdit.setAttribute("disabled", "");
   btnEdit.setAttribute("data-id", article._id);
+  btnEdit.addEventListener("click", (event) => {
+    editArticle(article._id);
+  });
 
   divActions.append(btnDelete, btnEdit);
 
@@ -80,8 +82,15 @@ const deleteArticle = async (id) => {
       method: "DELETE",
     });
     const body = await response.json();
-    console.log(body);
     fetchArticles();
+  } catch (err) {
+    console.error(`An error occurs: ${err}`);
+  }
+};
+
+const editArticle = (id) => {
+  try {
+    location.assign(`/form/form.html?id=${id}`);
   } catch (err) {
     console.error(`An error occurs: ${err}`);
   }
