@@ -39,3 +39,7 @@ a {
   color: var(--text);
   text-decoration: none;
 }
+
+strong {
+  columns: var(--accent);
+}

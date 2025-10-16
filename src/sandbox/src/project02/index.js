@@ -6,6 +6,11 @@ const baseURL = `https://restapi.fr/api/`;
 const collectionName = `mkr-articles`;
 
 const divArticlesContainer = document.querySelector(".articles-container");
+const divCategories = document.querySelector(".categories");
+const divSelectedCategory = document.querySelector(".selected-category");
+
+let articles;
+let categories;
 
 // Create one article container
 const createArticle = (article) => {
@@ -102,14 +107,73 @@ const createArticles = (articles) => {
   return articlesList;
 };
 
+// filter Category
+const filterByCategory = (category) => {
+  // extract articles in category
+  const filteredArticles = category
+    ? articles.filter((article) => article.category === category)
+    : articles;
+
+  divArticlesContainer.innerHTML = "";
+  divArticlesContainer.append(...createArticles(filteredArticles));
+
+  divSelectedCategory.innerHTML = `
+    <i class="fa-solid fa-xmark"></i> ${
+      category
+        ? category + "(" + filteredArticles.length + "/" + articles.length + ")"
+        : "All (" + articles.length + ")"
+    }
+  `;
+  divSelectedCategory.addEventListener("click", (event) => {
+    filterByCategory();
+  });
+};
+
+// Create a category
+const createCategoryElement = (category) => {
+  const li = document.createElement("li");
+  li.innerHTML = `${category.category} <strong>(${category.count})</strong>`;
+  li.addEventListener("click", (event) => {
+    filterByCategory(category.category);
+  });
+  return li;
+};
+
+const createCategoriesElements = (categories) => {
+  const articlesList = categories.map((category) =>
+    createCategoryElement(category)
+  );
+  return articlesList;
+};
+
+// Retreive all categories from articles list and count occurences
+const createCategories = (articles) => {
+  const categoriesList = articles.reduce((acc, article) => {
+    if (!acc.some((item) => item.category === article.category)) {
+      acc.push({
+        count: 1,
+        category: article.category,
+      });
+    } else {
+      acc.find((o) => o.category === article.category).count += 1;
+    }
+    return acc;
+  }, []);
+  return categoriesList;
+};
+
 // Retrive list of articles
 const fetchArticles = async () => {
   try {
     const repsonse = await fetch(`${baseURL}${collectionName}`);
-    const articles = await repsonse.json();
+    articles = await repsonse.json();
+    categories = createCategoriesElements(createCategories(articles));
 
     divArticlesContainer.innerHTML = "";
     divArticlesContainer.append(...createArticles(articles));
+    divCategories.innerHTML = "";
+    divCategories.append(...categories);
+    divSelectedCategory.innerHTML = "All (" + articles.length + ")";
   } catch (err) {
     console.error(`An error occurs: ${err}`);
   }
