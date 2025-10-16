@@ -108,7 +108,7 @@ const createArticles = (articles) => {
 };
 
 // filter Category
-const filterByCategory = (category) => {
+const filterByCategory = (event, category) => {
   // extract articles in category
   const filteredArticles = category
     ? articles.filter((article) => article.category === category)
@@ -116,6 +116,9 @@ const filterByCategory = (category) => {
 
   divArticlesContainer.innerHTML = "";
   divArticlesContainer.append(...createArticles(filteredArticles));
+
+  divCategories.childNodes.forEach((li) => li.classList.remove("active"));
+  event.target.classList.add("active");
 
   divSelectedCategory.innerHTML = `
     <i class="fa-solid fa-xmark"></i> ${
@@ -125,7 +128,7 @@ const filterByCategory = (category) => {
     }
   `;
   divSelectedCategory.addEventListener("click", (event) => {
-    filterByCategory();
+    filterByCategory(event, null);
   });
 };
 
@@ -134,7 +137,7 @@ const createCategoryElement = (category) => {
   const li = document.createElement("li");
   li.innerHTML = `${category.category} <strong>(${category.count})</strong>`;
   li.addEventListener("click", (event) => {
-    filterByCategory(category.category);
+    filterByCategory(event, category.category);
   });
   return li;
 };
@@ -148,17 +151,19 @@ const createCategoriesElements = (categories) => {
 
 // Retreive all categories from articles list and count occurences
 const createCategories = (articles) => {
-  const categoriesList = articles.reduce((acc, article) => {
-    if (!acc.some((item) => item.category === article.category)) {
-      acc.push({
-        count: 1,
-        category: article.category,
-      });
-    } else {
-      acc.find((o) => o.category === article.category).count += 1;
-    }
-    return acc;
-  }, []);
+  let categoriesList = articles
+    .reduce((acc, article) => {
+      if (!acc.some((item) => item.category === article.category)) {
+        acc.push({
+          count: 1,
+          category: article.category,
+        });
+      } else {
+        acc.find((o) => o.category === article.category).count += 1;
+      }
+      return acc;
+    }, [])
+    .sort((a, b) => a.category.localeCompare(b.category));
   return categoriesList;
 };
 
