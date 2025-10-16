@@ -1,11 +1,25 @@
 import "/assets/styles/styles.scss";
 import "./index.scss";
 
+import { confirmModal } from "/assets/js/modal.js";
+
 // API Dyma
 const baseURL = `https://restapi.fr/api/`;
 const collectionName = `mkr-articles`;
 
 const divArticlesContainer = document.querySelector(".articles-container");
+const divCategories = document.querySelector(".categories");
+const divSelectedCategory = document.querySelector(".selected-category");
+const selectSorting = document.querySelector(".sorting");
+
+let articles;
+let categories;
+let sortingBy = "desc";
+
+selectSorting.addEventListener("change", (event) => {
+  sortingBy = selectSorting.value;
+  fetchArticles();
+});
 
 // Create one article container
 const createArticle = (article) => {
@@ -24,6 +38,14 @@ const createArticle = (article) => {
   const divAuthor = document.createElement("div");
   divAuthor.classList.add("article-author");
   divAuthor.innerHTML = article.author ?? "Inconnu";
+  divAuthor.innerHTML +=
+    " - " +
+    new Date(article.createdAt).toLocaleDateString("fr-FR", {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
 
   const divCategory = document.createElement("div");
   divCategory.classList.add("article-category");
@@ -49,8 +71,10 @@ const createArticle = (article) => {
   btnEdit.classList.add("btn");
   btnEdit.classList.add("btn-primary");
   btnEdit.innerHTML = "Edit";
-  btnEdit.setAttribute("disabled", "");
   btnEdit.setAttribute("data-id", article._id);
+  btnEdit.addEventListener("click", (event) => {
+    editArticle(article._id);
+  });
 
   divActions.append(btnDelete, btnEdit);
 
@@ -67,13 +91,25 @@ const createArticle = (article) => {
 };
 
 const deleteArticle = async (id) => {
+  const answer = await confirmModal(
+    "Are you sure you want to delete this article?"
+  );
+  if (answer === true) {
+    try {
+      const response = await fetch(`${baseURL}${collectionName}/${id}`, {
+        method: "DELETE",
+      });
+      const body = await response.json();
+      fetchArticles();
+    } catch (err) {
+      console.error(`An error occurs: ${err}`);
+    }
+  }
+};
+
+const editArticle = (id) => {
   try {
-    const response = await fetch(`${baseURL}${collectionName}/${id}`, {
-      method: "DELETE",
-    });
-    const body = await response.json();
-    console.log(body);
-    fetchArticles();
+    location.assign(`/form/form.html?id=${id}`);
   } catch (err) {
     console.error(`An error occurs: ${err}`);
   }
@@ -85,14 +121,80 @@ const createArticles = (articles) => {
   return articlesList;
 };
 
+// filter Category
+const filterByCategory = (event, category) => {
+  // extract articles in category
+  const filteredArticles = category
+    ? articles.filter((article) => article.category === category)
+    : articles;
+
+  divArticlesContainer.innerHTML = "";
+  divArticlesContainer.append(...createArticles(filteredArticles));
+
+  divCategories.childNodes.forEach((li) => li.classList.remove("active"));
+  event.target.classList.add("active");
+
+  divSelectedCategory.innerHTML = `
+    <i class="fa-solid fa-xmark"></i> ${
+      category
+        ? category + "(" + filteredArticles.length + "/" + articles.length + ")"
+        : "All (" + articles.length + ")"
+    }
+  `;
+  divSelectedCategory.addEventListener("click", (event) => {
+    filterByCategory(event, null);
+  });
+};
+
+// Create a category
+const createCategoryElement = (category) => {
+  const li = document.createElement("li");
+  li.innerHTML = `${category.category} <strong>(${category.count})</strong>`;
+  li.addEventListener("click", (event) => {
+    filterByCategory(event, category.category);
+  });
+  return li;
+};
+
+const createCategoriesElements = (categories) => {
+  const articlesList = categories.map((category) =>
+    createCategoryElement(category)
+  );
+  return articlesList;
+};
+
+// Retreive all categories from articles list and count occurences
+const createCategories = (articles) => {
+  let categoriesList = articles
+    .reduce((acc, article) => {
+      if (!acc.some((item) => item.category === article.category)) {
+        acc.push({
+          count: 1,
+          category: article.category,
+        });
+      } else {
+        acc.find((o) => o.category === article.category).count += 1;
+      }
+      return acc;
+    }, [])
+    .sort((a, b) => a.category.localeCompare(b.category));
+  return categoriesList;
+};
+
 // Retrive list of articles
 const fetchArticles = async () => {
   try {
-    const repsonse = await fetch(`${baseURL}${collectionName}`);
-    const articles = await repsonse.json();
+    const repsonse = await fetch(
+      `${baseURL}${collectionName}?sort=createdAt:${sortingBy}`
+    );
+    articles = await repsonse.json();
+    categories = createCategoriesElements(createCategories(articles));
 
     divArticlesContainer.innerHTML = "";
     divArticlesContainer.append(...createArticles(articles));
+    divCategories.innerHTML = "";
+    divCategories.append(...categories);
+    divSelectedCategory.innerHTML = "All (" + articles.length + ")";
   } catch (err) {
     console.error(`An error occurs: ${err}`);
   }

@@ -1,6 +1,8 @@
 import "/assets/styles/styles.scss";
 import "./form.scss";
 
+import { confirmModal } from "/assets/js/modal.js";
+
 // API Dyma
 const baseURL = `https://restapi.fr/api/`;
 const collectionName = `mkr-articles`;
@@ -9,8 +11,32 @@ const collectionName = `mkr-articles`;
 const formNewArticle = document.querySelector("#formNewArticle");
 const listErrors = document.querySelector("#listErrors");
 let errorsList = [];
+let articleId;
 
 // Functions
+const fillForm = (article) => {
+  for (let element of formNewArticle.querySelectorAll(["input", "textarea"])) {
+    element.value = article[element.name];
+  }
+};
+
+const initForm = async () => {
+  articleId = new URLSearchParams(location.search).get("id");
+  if (articleId) {
+    try {
+      const response = await fetch(`${baseURL}${collectionName}/${articleId}`);
+      if (response.status < 300) {
+        const article = await response.json();
+        fillForm(article);
+      }
+    } catch (err) {
+      console.error(`An error occurs: ${err}`);
+    }
+  }
+};
+
+initForm();
+
 const isValidForm = (article) => {
   errorsList = [];
   for (let k in article) {
@@ -21,6 +47,16 @@ const isValidForm = (article) => {
 
   return !errorsList.length;
 };
+
+formNewArticle.addEventListener("reset", async (event) => {
+  event.preventDefault();
+  const answer = await confirmModal(
+    "Are you sure you want to abandon editing this article?"
+  );
+  if (answer === true) {
+    location.assign("/");
+  }
+});
 
 formNewArticle.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -42,14 +78,19 @@ formNewArticle.addEventListener("submit", async (event) => {
       const jsonData = JSON.stringify(article);
       listErrors.innerHTML = "";
       // Fetch form
-      const response = await fetch(`${baseURL}${collectionName}`, {
-        method: "POST",
+      let url = `${baseURL}${collectionName}`;
+      url += !articleId ? "" : `/${articleId}`;
+      console.log(articleId, url);
+      const response = await fetch(url, {
+        method: !articleId ? "POST" : "PATCH",
         body: jsonData,
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const body = await response.json();
+      if (response.status < 299) {
+        location.assign("/");
+      }
     } catch (err) {
       console.error(`An error occurs: ${err}`);
     }

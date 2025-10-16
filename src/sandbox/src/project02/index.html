@@ -25,7 +25,7 @@
               <a class="header-nav active" href="/">Home</a>
             </li>
             <li>
-              <a class="header-nav" href="./form/form.html">Add new article</a>
+              <a class="header-nav" href="/form/form.html">Add new article</a>
             </li>
           </ul>
           <div class="header-menu-icon">
@@ -34,6 +34,19 @@
         </div>
       </header>
       <div class="content">
+        <div class="sidebar">
+          <select class="sorting">
+            <option value="desc">The most recent</option>
+            <option value="asc">The oldest</option>
+          </select>
+          <div class="selected-category">---</div>
+          <ul class="categories">
+            <li>General <strong>(1)</strong></li>
+            <li>Space <strong>(3)</strong></li>
+            <li>History <strong>(2)</strong></li>
+            <li>Geography <strong>(4)</strong></li>
+          </ul>
+        </div>
         <div class="articles-container"></div>
       </div>
       <footer>&copy; blog 2025</footer>
