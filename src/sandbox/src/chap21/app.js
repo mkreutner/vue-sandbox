@@ -6,10 +6,10 @@ const runL159 = false; // Déclaration d'une classe
 const runL160 = false; // L'héritage avec les classes
 const runL161 = false; // Les méthodes statiques
 const runL162 = false; // Les propriétés privés
-const runL163 = true; // Les champs publics
+const runL163 = false; // Les champs publics
 const runL164 = false; // Etendre les objets natifs avec extends
 const runL165 = false; // L'opératuer instanceof
-const runL166 = false; // Les mixins
+const runL166 = true; // Les mixins
 
 //#region Déclaration d'une classe
 if (runL159) {
@@ -288,15 +288,57 @@ if (runL163) {
 
 //#region Etendre les objets natifs avec extends
 if (runL164) {
+  class ExtendedArray extends Array {
+    random() {
+      const length = this.length;
+      let i = 0;
+      while (i < length) {
+        this[i] = Math.round(Math.random() * 10);
+        i++;
+      }
+    }
+  }
+
+  const arr = new ExtendedArray(1, 2, 3, 4, 5, 6, 7, 8, 9);
+  arr.random();
+  console.log(arr);
 }
 //#endregion
 
 //#region L'opératuer instanceof
 if (runL165) {
+  class Car {}
+  const car = new Car();
+  console.log(car instanceof Object);
+  console.log(car instanceof Car);
 }
 //#endregion
 
 //#region Les mixins
 if (runL166) {
+  const options = {
+    startRadio() {
+      console.log("start radio");
+    },
+    stopRadio() {
+      console.log("stop radio");
+    },
+  };
+
+  class Car {}
+  Object.assign(Car.prototype, options);
+  class Bus {}
+  Object.assign(Bus.prototype, options);
+  class Plane {}
+  Object.assign(Plane.prototype, options);
+
+  const car = new Car();
+  const bus = new Bus();
+  const plane = new Plane();
+
+  console.log(car, bus, plane);
+
+  car.startRadio();
+  car.stopRadio();
 }
 //#endregion
