@@ -9,7 +9,7 @@ const runL162 = false; // Les propriétés privés
 const runL163 = false; // Les champs publics
 const runL164 = false; // Etendre les objets natifs avec extends
 const runL165 = false; // L'opératuer instanceof
-const runL166 = trfalseue; // Les mixins
+const runL166 = false; // Les mixins
 
 //#region Déclaration d'une classe
 if (runL159) {
